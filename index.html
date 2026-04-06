@@ -1,154 +1,69 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kopi Racing POS</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-    }
-    header {
-      background: #000;
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    .container {
-      display: flex;
-      padding: 20px;
-      gap: 20px;
-    }
-    .menu, .cart {
-      flex: 1;
-      background: #1c1c1c;
-      padding: 15px;
-      border-radius: 10px;
-    }
-    h2 {
-      border-bottom: 2px solid #ff3c3c;
-      padding-bottom: 5px;
-    }
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin: 10px 0;
-      padding: 10px;
-      background: #2a2a2a;
-      border-radius: 8px;
-    }
-    button {
-      background: #ff3c3c;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #ff1a1a;
-    }
-    .total {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <header>KOPI RACING POS</header>
-  <div class="container">
-    <div class="menu">
-      <h2>Menu</h2>
-      <div id="menu-list"></div>
-    </div>
-    <div class="cart">
-      <h2>Keranjang</h2>
-      <div id="cart-list"></div>
-      <div class="total">Total: Rp <span id="total">0</span></div>
-    </div>
-  </div>
-
-  <script>
-    const menu = [
-      { name: "Kopi Aren", price: 25000 },
-      { name: "Aren Pandan", price: 25000 },
-      { name: "Aren Caramel", price: 25000 },
-      { name: "Aren Biscoff", price: 30000 },
-      { name: "Aren Oat", price: 30000 },
-      { name: "Butterscotch Crumble", price: 30000 },
-      { name: "Kopi Banana", price: 25000 },
-      { name: "Kopi Vanilla", price: 25000 },
-      { name: "Kopi Hazelnut", price: 25000 },
-      { name: "Caramel Macchiato", price: 25000 },
-      { name: "Espresso", price: 20000 },
-      { name: "Americano", price: 20000 },
-      { name: "Kopi Latte", price: 25000 },
-      { name: "Vanilla Latte", price: 25000 },
-      { name: "Hazelnut Latte", price: 25000 },
-      { name: "Cappuccino", price: 25000 },
-      { name: "V60", price: 25000 },
-      { name: "Vietnam Drip", price: 25000 },
-      { name: "Japanese Coffee", price: 25000 },
-      { name: "Matcha", price: 30000 },
-      { name: "Matcha Berry", price: 30000 },
-      { name: "Thai Tea", price: 20000 },
-      { name: "Green Tea", price: 20000 },
-      { name: "Taro", price: 20000 },
-      { name: "Coklat", price: 20000 },
-      { name: "Milo", price: 20000 }
-    ];
-
-    let cart = [];
-
-    const menuList = document.getElementById("menu-list");
-    const cartList = document.getElementById("cart-list");
-    const totalEl = document.getElementById("total");
-
-    function renderMenu() {
-      menu.forEach((item, index) => {
-        const div = document.createElement("div");//
-        div.className = "item";
-        div.innerHTML = `
-          <span>${item.name} - Rp ${item.price}</span>
-          <button onclick="addToCart(${index})">Tambah</button>
-        `;
-        menuList.appendChild(div);
-      });
-    }
-
-    function addToCart(index) {
-      cart.push(menu[index]);
-      renderCart();
-    }
-
-    function renderCart() {
-      cartList.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, i) => {
-        total += item.price;
-        const div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `
-          <span>${item.name}</span>
-          <button onclick="removeItem(${i})">X</button>
-        `;
-        cartList.appendChild(div);
-      });
-      totalEl.innerText = total;
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
-
-    renderMenu();
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://media.base44.com/images/public/69d346ae27367783f7249d3a/d6ca3ce88_logo.png" rel="icon" type="image/svg+xml"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="/manifest.json" rel="manifest"/>
+  <title>
+   BaristaFlow
+  </title>
+  <script crossorigin="" src="/assets/index-CeN2Yu0h.js" type="module">
   </script>
-</body>
+  <link crossorigin="" href="/assets/index-Dr2ZQ8EK.css" rel="stylesheet"/>
+  <script type="module">
+   if (window.self === window.top) {
+  let lastPath = "";
+  function getPageNameFromPath(path) {
+    const segments = path.split("/").filter(Boolean);
+    return segments[0] || null;
+  }
+  function trackPageView() {
+    const path = window.location.pathname;
+    if (path === lastPath) return;
+    lastPath = path;
+    const pageName = getPageNameFromPath(path) || "home";
+    const appId = "69d346ae27367783f7249d3a";
+    if (!appId) return;
+    fetch(`/app-logs/${appId}/log-user-in-app/${pageName}`, {
+      method: "POST",
+    }).catch(() => {});
+  }
+  const originalPushState = history.pushState.bind(history);
+  history.pushState = function (...args) {
+    originalPushState(...args);
+    trackPageView();
+  };
+  const originalReplaceState = history.replaceState.bind(history);
+  history.replaceState = function (...args) {
+    originalReplaceState(...args);
+    trackPageView();
+  };
+  window.addEventListener("popstate", trackPageView);
+  trackPageView();
+}
+  </script>
+  <meta content="An all-in-one coffee shop management suite for tracking orders, managing inventory, and simplifying daily closings." name="description"/>
+  <meta content="BaristaFlow" property="og:title"/>
+  <meta content="An all-in-one coffee shop management suite for tracking orders, managing inventory, and simplifying daily closings." property="og:description"/>
+  <meta content="https://media.base44.com/images/public/69d346ae27367783f7249d3a/d6ca3ce88_logo.png/v1/fill/w_1200,h_630/d6ca3ce88_logo.png" property="og:image"/>
+  <meta content="https://brew-point-pro.base44.app" property="og:url"/>
+  <meta content="website" property="og:type"/>
+  <meta content="BaristaFlow" property="og:site_name"/>
+  <meta content="BaristaFlow" name="twitter:title"/>
+  <meta content="An all-in-one coffee shop management suite for tracking orders, managing inventory, and simplifying daily closings." name="twitter:description"/>
+  <meta content="https://media.base44.com/images/public/69d346ae27367783f7249d3a/d6ca3ce88_logo.png/v1/fill/w_1200,h_630/d6ca3ce88_logo.png" name="twitter:image"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="https://brew-point-pro.base44.app" name="twitter:url"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="BaristaFlow" name="apple-mobile-web-app-title"/>
+  <link href="https://brew-point-pro.base44.app" rel="canonical"/>
+  <script async="true" data-app-id="69d346ae27367783f7249d3a" data-platform-url="https://app.base44.com" src="/static/js/badge.js">
+  </script>
+ </head>
+ <body>
+  <div id="root">
+  </div>
+ </body>
 </html>
